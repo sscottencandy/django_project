@@ -29,25 +29,30 @@ def toon_detail(request, toon_id):
     {'toon':toon, 'form':form, 'comment_set': comment_set})
 
 def toon_edit(request, toon_id):
-    toon = Toon.objects.filter(is_deleted = 0).get(id=toon_id)
+    comment = Comment.objects.get(commentid=toon_id)
     form = ToonForm(initial={
-        'title':toon.title,
-        'content':toon.content
+        'title':comment.commentid,
+        'content':comment.comment,
     })
     if request.method == 'POST':
         form = ToonForm(request.POST)
         if form.is_valid():
-            toon.title = form.cleaned_data['title']
-            toon.content = form.cleaned_data['content']
-            toon.save()
+            comment.title = form.cleaned_data['commentid']
+            comment.content = form.cleaned_data['comment']
+            comment.save()
             return redirect(reverse('toon:detail', kwargs={'toon_id':toon_id}))
     return render(request, 'toon/edit.html', {'form':form})
 
 def toon_delete(request, toon_id):
-    toon = Toon.objects.get(id = toon_id)
+    toon = Toon.objects.get(titleid = toon_id)
     toon.is_deleted = True
     toon.save()
     return redirect(reverse('toon:index'))
+
+# def toon_category(request):
+#     toon = Toon.objects.all()
+#     return 
+
 
 # def toon_create(request):
 #     #print(dir(request))
