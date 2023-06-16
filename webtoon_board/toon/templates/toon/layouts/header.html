@@ -1,0 +1,67 @@
+{% load static %}
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-success fixed-top bg-success">
+        <div class="container-fluid">
+            <img src="{% static 'bootstrap/image/naverwebtoon.jpg' %}" alt="네이버웹툰사진" height = "50" width="50">
+            <a class="navbar-brand" href="#">Naver Webtoon</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+ 
+                    {% comment %}{% for cgr in category_list %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'cgr_prod' cgr.id %}">
+                                {{cgr.title}}
+                            </a>
+                        </li>
+                    {% endfor %} {% endcomment %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">액션</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">개그</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">일상</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">드라마</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">판타지</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">무협/사극</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">로맨스</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">감성</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">스포츠</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/toon">스릴러</a>
+                    </li>
+                </ul>
+
+                <div class='d-flex'>
+                    {% if user.is_authenticated %}
+                        <a class='btn btn-outline-dark' style='color:white;' href="{% url 'user:logout' %}">로그아웃</a>
+                    {% else %}
+                    <a class='btn btn-outline-dark' style='color:white;' href="{% url 'user:login' %}">로그인</a>
+                    <a class='btn btn-warning' href="{% url 'user:register' %}">회원가입</a>
+                    {% endif %}
+                    <form class="d-flex">
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
