@@ -4,14 +4,14 @@
 
 <div class="container">
     <div class="mt-5">
-        <h2>네이버 웹툰</h2>
+        <h2><b>네이버 웹툰</b></h2>
         <div class="list-group">
             <div class="row">
                 {% for toon in toon_list %}
                 <div class='col-4'>
                     <a href="/toon/{{toon.titleid}}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
-                            <img src= "{{toon.thumnail_URL}}" alt="웹툰사진" height = "200" width="150">
+                            <img src= "{{toon.thumnail_URL}}" alt="웹툰사진" height = "200" width="280" style="display:block; margin:auto">
                         </div>
                         <h5 class="mb-1">{{toon.titlename}}</h5>
                         <h5 class="mb-1">

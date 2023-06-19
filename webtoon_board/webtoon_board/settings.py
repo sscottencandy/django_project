@@ -127,9 +127,9 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL= '/user'
+LOGIN_REDIRECT_URL= '/toon'
 
-LOGOUT_REDIRECT_URL= '/user'
+LOGOUT_REDIRECT_URL= '/toon'
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'webtoon_board', 'static')]
 

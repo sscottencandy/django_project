@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Toon, Comment, User
 from .forms import CommentForm, ToonForm
 from django.db.models import Prefetch
@@ -37,37 +37,15 @@ def toon_edit(request, toon_id):
     if request.method == 'POST':
         form = ToonForm(request.POST)
         if form.is_valid():
-            comment.title = form.cleaned_data['commentid']
-            comment.content = form.cleaned_data['comment']
+            comment.comment = form.cleaned_data['comment']
             comment.save()
             return redirect(reverse('toon:detail', kwargs={'toon_id':toon_id}))
     return render(request, 'toon/edit.html', {'form':form})
 
 def toon_delete(request, toon_id):
-    toon = Toon.objects.get(titleid = toon_id)
-    toon.is_deleted = True
-    toon.save()
-    return redirect(reverse('toon:index'))
-
-# def toon_category(request):
-#     toon = Toon.objects.all()
-#     return 
-
-
-# def toon_create(request):
-#     #print(dir(request))
-
-#     form = ToonForm()
-#     if request.method == 'POST':
-#         form = ToonForm(request.POST)
-#         if form.is_valid():
-#             # board = Board(
-#             #     title = data['title'],
-#             #     content = data['content']
-#             # )
-#             # board.save()
-#             form.save(commit=True)
-#             return redirect(reverse('toon:index'))
-#             #return redirect('/board')
-
-#     return render(request, 'toon/create.html', {'form':form})
+    comment = get_object_or_404(Comment, commentid = toon_id)
+    if request.method == 'POST':
+        comment.delete()
+        return redirect(reverse('toon:detail'))
+    else:
+        return redirect(reverse('toon:detail'))
