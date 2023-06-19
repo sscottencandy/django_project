@@ -13,6 +13,6 @@ class RegisterForm(UserCreationForm):
                             widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
 
-class Meta:
-    model = User
-    fileds = ('username', 'password1', 'password2', 'email')
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2', 'email')
