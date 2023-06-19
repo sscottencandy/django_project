@@ -28,8 +28,8 @@ def toon_detail(request, toon_id):
     return render(request, 'toon/detail.html', 
     {'toon':toon, 'form':form, 'comment_set': comment_set})
 
-def toon_edit(request, toon_id):
-    comment = Comment.objects.get(commentid=toon_id)
+def toon_edit(request, comment_id):
+    comment = Comment.objects.get(commentid=comment_id)
     form = ToonForm(initial={
         'title':comment.commentid,
         'content':comment.comment,
@@ -39,13 +39,28 @@ def toon_edit(request, toon_id):
         if form.is_valid():
             comment.comment = form.cleaned_data['comment']
             comment.save()
-            return redirect(reverse('toon:detail', kwargs={'toon_id':toon_id}))
+            return redirect(reverse('toon:detail', kwargs={'comment_id':comment_id}))
     return render(request, 'toon/edit.html', {'form':form})
 
-def toon_delete(request, toon_id):
-    comment = get_object_or_404(Comment, commentid = toon_id)
+
+from django.http import HttpRequest
+def toon_delete(request:HttpRequest, comment_id):
+    comment = get_object_or_404(Comment, commentid = comment_id)
     if request.method == 'POST':
         comment.delete()
-        return redirect(reverse('toon:detail'))
-    else:
-        return redirect(reverse('toon:detail'))
+    return redirect(request.headers['Referer'])
+
+# from django.contrib.auth.decorators import login_required
+# @login_required
+# def comment_like(request, comment_id):
+#     post = get_object_or_404(Post, id=comment_id)
+#     user = request.user
+#     comment = Comment.objects.get(user=user)
+
+#     check_like_post = comment.like_posts.filter(id=comment_id)
+
+#     comment.like_posts.add(post)
+#     post.like_count += 1
+#     post.save()
+
+#     return redirect('toon:detail', comment_id)
