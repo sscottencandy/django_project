@@ -136,13 +136,6 @@ LOGOUT_REDIRECT_URL= '/toon'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-    "localhost",
-]
-
-
-
 # This example is unlikely to be appropriate for your project.
 DEBUG_TOOLBAR_CONFIG = {
     # Toolbar options
@@ -159,3 +152,4 @@ DEBUG_TOOLBAR_CONFIG = {
 if DEBUG:
     import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)
+
